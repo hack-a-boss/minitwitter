@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e6fa51b0-2cf5-41eb-96c9-535b46b10c21",
+		"_postman_id": "2aaeb673-edf3-46dc-9ca4-0e185ad9e3df",
 		"name": "Twitter API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -23,12 +23,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/user",
+							"raw": "http://localhost:4000/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"user"
 							]
@@ -42,12 +42,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/user/1",
+							"raw": "http://localhost:4000/user/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"user",
 								"1"
@@ -57,20 +57,47 @@
 					"response": []
 				},
 				{
-					"name": "Get Me",
+					"name": "Get User Tweets",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/user/1",
+							"raw": "http://localhost:4000/user/1/tweets",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"user",
-								"1"
+								"1",
+								"tweets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								""
 							]
 						}
 					},
@@ -91,12 +118,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/login",
+							"raw": "http://localhost:4000/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"login"
 							]
@@ -116,7 +143,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwNDg5MDEwLCJleHAiOjE2NTMwODEwMTB9.IyGKx2xQ1_jsyR_7MhSMhbld2Skk2ySbMeXYLOj0VVU",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUzNDkzMTEzLCJleHAiOjE2NTYwODUxMTN9.z4bIwYOKy9ywnZM1_NQtqj8xS4tn-R-_3frfcm7my74",
 								"type": "default"
 							}
 						],
@@ -125,13 +152,13 @@
 							"formdata": [
 								{
 									"key": "text",
-									"value": "Tweet de berto de hackaboss a ver que tal funciona",
+									"value": "This is lula!!",
 									"type": "default"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/Users/berto/Downloads/foto.jpg"
+									"src": "/home/berto/Downloads/lula.jpeg"
 								}
 							],
 							"options": {
@@ -141,12 +168,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001",
+							"raw": "http://localhost:4000",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001"
+							"port": "4000"
 						}
 					},
 					"response": []
@@ -157,12 +184,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/",
+							"raw": "http://localhost:4000/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								""
 							]
@@ -176,15 +203,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/tweet/1",
+							"raw": "http://localhost:4000/tweet/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"tweet",
-								"1"
+								"12"
 							]
 						}
 					},
@@ -202,12 +229,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3001/tweet/1",
+							"raw": "http://localhost:4000/tweet/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3001",
+							"port": "4000",
 							"path": [
 								"tweet",
 								"1"
