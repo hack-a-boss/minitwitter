@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSingleTweetService, getUserDataService } from "../services";
+import { getUserDataService } from "../services";
 
 const useUser = (id) => {
   const [user, setUser] = useState([]);

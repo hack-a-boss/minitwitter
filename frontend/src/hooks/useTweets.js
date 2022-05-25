@@ -23,7 +23,7 @@ const useTweets = (id) => {
     };
 
     loadTweets();
-  }, []);
+  }, [id]);
 
   const addTweet = (data) => {
     setTweets([data, ...tweets]);

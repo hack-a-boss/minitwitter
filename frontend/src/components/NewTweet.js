@@ -12,12 +12,15 @@ export const NewTweet = ({ addTweet }) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const data = new FormData(e.target);
       const tweet = await sendTweetService({ data, token });
 
       addTweet(tweet);
     } catch (error) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -42,6 +45,7 @@ export const NewTweet = ({ addTweet }) => {
               <img
                 src={URL.createObjectURL(image)}
                 style={{ width: "100px" }}
+                alt="Preview"
               />
             </figure>
           ) : null}

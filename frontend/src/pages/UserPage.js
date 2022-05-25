@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { ErrorMessage } from "../components/ErrorMessage";
-import { TweetList } from "../components/TweetList";
-import useTweets from "../hooks/useTweets";
 import { UserTweets } from "../components/UserTweets";
 
 export const UserPage = () => {
