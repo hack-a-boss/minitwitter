@@ -17,6 +17,9 @@ export const NewTweet = ({ addTweet }) => {
       const tweet = await sendTweetService({ data, token });
 
       addTweet(tweet);
+
+      e.target.reset();
+      setImage(null);
     } catch (error) {
       setError(error.message);
     } finally {
