@@ -1,8 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
 
 export const Auth = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useContext(AuthContext);
 
   return user ? (
     <p>

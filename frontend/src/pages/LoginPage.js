@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { logInUserService } from "../services";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

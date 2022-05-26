@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { deleteTweetService } from "../services";
+import { AuthContext } from "../context/AuthContext";
 
 export const Tweet = ({ tweet, removeTweet }) => {
   const navigate = useNavigate();
-  const { token, user } = useAuth();
+  const { token, user } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const deleteTweet = async (id) => {

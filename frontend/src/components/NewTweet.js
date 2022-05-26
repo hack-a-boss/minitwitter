@@ -1,9 +1,9 @@
-import { useState } from "react";
-import useAuth from "../hooks/useAuth";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { sendTweetService } from "../services";
 
 export const NewTweet = ({ addTweet }) => {
-  const { token } = useAuth();
+  const { token } = useContext(AuthContext);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
