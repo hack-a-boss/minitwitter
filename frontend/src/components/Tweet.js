@@ -39,7 +39,13 @@ export const Tweet = ({ tweet, removeTweet }) => {
       </p>
       {user && user.id === tweet.user_id ? (
         <section>
-          <button onClick={() => deleteTweet(tweet.id)}>Delete tweet</button>
+          <button
+            onClick={() => {
+              if (window.confirm("Are you sure?")) deleteTweet(tweet.id);
+            }}
+          >
+            Delete tweet
+          </button>
           {error ? <p>{error}</p> : null}
         </section>
       ) : null}
