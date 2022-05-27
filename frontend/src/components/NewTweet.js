@@ -27,9 +27,9 @@ export const NewTweet = ({ addTweet }) => {
     }
   };
   return (
-    <section>
+    <>
       <h1>Add new Tweet</h1>
-      <form onSubmit={handleForm}>
+      <form className="new-tweet" onSubmit={handleForm}>
         <fieldset>
           <label htmlFor="text">Text</label>
           <input type="text" name="text" id="text" required />
@@ -57,6 +57,6 @@ export const NewTweet = ({ addTweet }) => {
         {error ? <p>{error}</p> : null}
         {loading ? <p>posting tweet...</p> : null}
       </form>
-    </section>
+    </>
   );
 };

@@ -23,7 +23,7 @@ export const Tweet = ({ tweet, removeTweet }) => {
   };
 
   return (
-    <article>
+    <article className="tweet">
       <p>{tweet.text}</p>
       {tweet.image ? (
         <img

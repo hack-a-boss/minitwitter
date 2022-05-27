@@ -12,7 +12,7 @@ import { UserPage } from "./pages/UserPage";
 
 function App() {
   return (
-    <main>
+    <main className="app">
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
