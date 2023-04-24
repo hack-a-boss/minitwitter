@@ -19,7 +19,7 @@ async function main() {
         id INTEGER PRIMARY KEY AUTO_INCREMENT,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL,
-        created_at DATETIME DEFAULT UTC_TIMESTAMP
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
@@ -29,7 +29,7 @@ async function main() {
         user_id INTEGER NOT NULL,
         text VARCHAR(280) NOT NULL,
         image VARCHAR(100),
-        created_at DATETIME DEFAULT UTC_TIMESTAMP,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id)
         );
     `);
