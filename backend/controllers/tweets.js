@@ -3,15 +3,20 @@ const {
   getAllTweets,
   getTweetById,
   deleteTweetById,
+
+  likeTweet,
+  dislikeTweet,
 } = require('../db/tweets');
-const { generateError, createPathIfNotExists } = require('../helpers');
-const path = require('path');
-const sharp = require('sharp');
-const { nanoid } = require('nanoid');
+const {
+  generateError,
+  uploadImage,
+  deleteUploadedFile,
+} = require('../helpers');
 
 const getTweetsController = async (req, res, next) => {
   try {
-    const tweets = await getAllTweets();
+    const userId = req.userId;
+    const tweets = await getAllTweets(userId);
 
     res.send({
       status: 'ok',
@@ -34,26 +39,13 @@ const newTweetController = async (req, res, next) => {
     }
     let imageFileName;
 
-    if (req.files && req.files.image) {
-      // Creo el path del directorio uploads
-      const uploadsDir = path.join(__dirname, '../uploads');
-
-      // Creo el directorio si no existe
-      await createPathIfNotExists(uploadsDir);
-
-      // Procesar la imagen
-      const image = sharp(req.files.image.data);
-      image.resize(500);
-
-      // Guardo la imagen con un nombre aleatorio en el directorio uploads
-      imageFileName = `${nanoid(24)}.jpg`;
-
-      await image.toFile(path.join(uploadsDir, imageFileName));
+    if (req.files?.image) {
+      imageFileName = await uploadImage(req.files.image.data);
     }
 
     const id = await createTweet(req.userId, text, imageFileName);
 
-    const tweet = await getTweetById(id);
+    const tweet = await getTweetById(id, req.userId);
 
     res.send({
       status: 'ok',
@@ -67,7 +59,11 @@ const newTweetController = async (req, res, next) => {
 const getSingleTweetController = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const tweet = await getTweetById(id);
+    const userId = req.userId;
+
+    console.log(userId);
+
+    const tweet = await getTweetById(id, userId);
 
     res.send({
       status: 'ok',
@@ -94,12 +90,46 @@ const deleteTweetController = async (req, res, next) => {
       );
     }
 
+    console.log(tweet);
+
     // Borrar el tweet
     await deleteTweetById(id);
+    if (tweet.image) await deleteUploadedFile(tweet.image);
 
     res.send({
       status: 'ok',
       message: `El tweet con id: ${id} fue borrado`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const likeTweetController = async (req, res, next) => {
+  try {
+    //tweet id
+    const { id } = req.params;
+
+    //token user id
+    const userId = req.userId;
+
+    const tweet = await getTweetById(id, userId);
+
+    console.log(tweet.likedByMe);
+
+    if (tweet.likedByMe === 0) {
+      //quitamos like
+      await likeTweet(userId, id);
+    } else {
+      //hacemos like
+      await dislikeTweet(userId, id);
+    }
+
+    const updatedTweet = await getTweetById(id, userId);
+
+    res.send({
+      status: 'ok',
+      data: updatedTweet,
     });
   } catch (error) {
     next(error);
@@ -111,4 +141,5 @@ module.exports = {
   newTweetController,
   getSingleTweetController,
   deleteTweetController,
+  likeTweetController,
 };

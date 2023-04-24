@@ -11,6 +11,9 @@ const {
   getUserTweetsController,
   getMeController,
   loginController,
+  updateUserDataController,
+  updateUserPasswordController,
+  updateUserAvatarController,
 } = require('./controllers/users');
 
 const {
@@ -18,9 +21,10 @@ const {
   newTweetController,
   getSingleTweetController,
   deleteTweetController,
+  likeTweetController,
 } = require('./controllers/tweets');
 
-const { authUser } = require('./middlewares/auth');
+const { authUser, isUser } = require('./middlewares/auth');
 
 const app = express();
 
@@ -30,18 +34,24 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use('/uploads', express.static('./uploads'));
 
+app.use(authUser);
+
 //Rutas de usuario
 app.post('/user', newUserController);
 app.get('/user/:id', getUserController);
 app.get('/user/:id/tweets', getUserTweetsController);
-app.get('/user', authUser, getMeController);
+app.get('/user', isUser, getMeController);
+app.put('/user', isUser, updateUserDataController);
+app.put('/user/password', isUser, updateUserPasswordController);
+app.put('/user/avatar', isUser, updateUserAvatarController);
 app.post('/login', loginController);
 
 //Rutas de tweets
-app.post('/', authUser, newTweetController);
+app.post('/', isUser, newTweetController);
 app.get('/', getTweetsController);
 app.get('/tweet/:id', getSingleTweetController);
-app.delete('/tweet/:id', authUser, deleteTweetController);
+app.post('/tweet/:id/like', isUser, likeTweetController);
+app.delete('/tweet/:id', isUser, deleteTweetController);
 
 // Middleware de 404
 app.use((req, res) => {
