@@ -174,7 +174,7 @@ const updateUserAvatarController = async (req, res, next) => {
 
       const updatedUser = await updateUserAvatar(id, avatarImageFileName);
 
-      await deleteUploadedFile(user.avatar);
+      if (user.avatar) await deleteUploadedFile(user.avatar);
 
       res.send({
         status: 'ok',
