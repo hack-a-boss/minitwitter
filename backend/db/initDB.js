@@ -45,7 +45,7 @@ async function main() {
         user_id INTEGER NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (tweet_id) REFERENCES tweets(id),
+        FOREIGN KEY (tweet_id) REFERENCES tweets(id) ON DELETE CASCADE,
         UNIQUE KEY user_likes (user_id, tweet_id)
       )
     `);
