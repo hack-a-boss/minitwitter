@@ -68,7 +68,7 @@ const getUserTweetsController = async (req, res, next) => {
 
 const getMeController = async (req, res, next) => {
   try {
-    const user = await getUserById(req.userId, false);
+    const user = await getUserById(req.userId);
 
     res.send({
       status: 'ok',
