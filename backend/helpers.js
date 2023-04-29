@@ -25,7 +25,7 @@ const deleteUploadedFile = async (name) => {
 
 const uploadImage = async (imageData) => {
   // Creo el path del directorio uploads
-  const uploadsDir = path.join(__dirname, '../uploads');
+  const uploadsDir = path.join(__dirname, './uploads');
 
   // Creo el directorio si no existe
   await createPathIfNotExists(uploadsDir);
